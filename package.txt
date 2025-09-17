@@ -5,3 +5,9 @@
   //   "start": "node dist/server.js",
   //   "start:prod": "bun dist/server.js"
   // },
+  "scripts": {
+  "dev": "nodemon --exec \"bun src/server.ts\" --ext ts,js,json",
+  "dev:bun": "bun --watch src/server.ts",
+  "build": "tsc -p .",
+  "start": "node dist/server.js"
+}

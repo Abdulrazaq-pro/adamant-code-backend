@@ -11,7 +11,10 @@ RUN bun install
 # Copy source code
 COPY . .
 
-# Build TypeScript with npm (since your package.json uses tsc)
+# Generate Prisma client
+RUN bunx prisma generate
+
+# Build TypeScript with bun
 RUN bun run build
 
 EXPOSE 8000

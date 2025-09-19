@@ -7,7 +7,7 @@ export const createConversation = async (data: { title: string }) => {
     const conversation = await prisma.conversation.create({
       data,
       include: {
-        messages: true, // include messages relation
+        messages: true, 
       },
     });
 

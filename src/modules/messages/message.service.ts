@@ -6,7 +6,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const createMessage = async (data: CreateMessageInput) => {
   try {
-    console.log("📩 Creating user message:", data);
+    console.log("Creating user message:", data);
 
     // Always save the user message
     const userMessage = await prisma.message.create({
@@ -16,28 +16,26 @@ export const createMessage = async (data: CreateMessageInput) => {
         isUser: true,
       },
     });
-    console.log("✅ User message saved:", userMessage);
+    console.log("User message saved:", userMessage);
 
     // Optional delay for simulating AI
     // await delay(2000);
 
-    // Create the AI response
     const aiResponseText = "This is an AI generated response";
     const aiMessage = await prisma.message.create({
       data: {
         content: aiResponseText,
         conversationId: data.conversationId,
-        isUser: false, // bot response
+        isUser: false, 
       },
     });
-    console.log("🤖 AI message saved:", aiMessage);
+    console.log("AI message saved:", aiMessage);
 
-    // Update conversation timestamp for activity
     await prisma.conversation.update({
       where: { id: data.conversationId },
       data: { updatedAt: new Date() },
     });
-    console.log("🕒 Conversation updated with new timestamp");
+    console.log("Conversation updated with new timestamp");
 
     return {
       success: true,
@@ -45,7 +43,7 @@ export const createMessage = async (data: CreateMessageInput) => {
       data: aiMessage,
     };
   } catch (error) {
-    console.error("❌ Error creating message:", error);
+    console.error("Error creating message:", error);
     return {
       success: false,
       message: "Failed to create message",
@@ -63,7 +61,7 @@ export const getMessagesByConversation = async (conversationId: string) => {
       orderBy: { createdAt: "asc" },
     });
 
-    console.log("✅ Messages fetched:", messages.length);
+    console.log("Messages fetched:", messages.length);
 
     return {
       success: true,
@@ -71,7 +69,7 @@ export const getMessagesByConversation = async (conversationId: string) => {
       data: messages,
     };
   } catch (error) {
-    console.error("❌ Error fetching messages:", error);
+    console.error("Error fetching messages:", error);
     return {
       success: false,
       message: "Failed to fetch messages",
@@ -82,10 +80,10 @@ export const getMessagesByConversation = async (conversationId: string) => {
 
 export const deleteMessage = async (id: string) => {
   try {
-    console.log("🗑️ Deleting message with ID:", id);
+    console.log("Deleting message with ID:", id);
 
     const deleted = await prisma.message.delete({ where: { id } });
-    console.log("✅ Message deleted:", deleted);
+    console.log("Message deleted:", deleted);
 
     return {
       success: true,
@@ -93,7 +91,7 @@ export const deleteMessage = async (id: string) => {
       data: deleted,
     };
   } catch (error) {
-    console.error("❌ Error deleting message:", error);
+    console.error("Error deleting message:", error);
     return {
       success: false,
       message: "Failed to delete message",

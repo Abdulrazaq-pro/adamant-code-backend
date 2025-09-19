@@ -10,7 +10,6 @@ import {
   getMessagesHandler,
 } from "../messages/message.controller";
 
-// import { createMessageHandler } from
 
 const router = Router();
 

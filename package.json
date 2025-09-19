@@ -8,14 +8,18 @@
     "dev:bun": "bun --watch src/server.ts",
     "build": "tsc -p .",
     "start": "node dist/server.js",
-    "start:prod": "bun dist/server.js"
+    "start:prod": "bun dist/server.js",
+    "test": "bun --env-file=.env.test test",
+    "test:watch": "bun --env-file=.env.test test --watch",
+    "db:migrate:test": "bun --env-file=.env.test prisma migrate deploy"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.5.1",
+    "@types/node": "^24.5.2",
     "prisma": "^6.16.1",
+    "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2"
   },
   "peerDependencies": {
@@ -23,6 +27,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.16.1",
+    "@types/jest": "^30.0.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
     "cors": "^2.8.5",

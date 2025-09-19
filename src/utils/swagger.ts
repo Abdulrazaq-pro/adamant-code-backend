@@ -1,8 +1,6 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
-
-// Use require for JSON import to avoid TypeScript issues
 const pkg = require("../../package.json");
 
 const options: swaggerJsdoc.Options = {
@@ -34,13 +32,10 @@ const options: swaggerJsdoc.Options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 export function setupSwagger(app: Express) {
-  // Swagger page
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  // Docs in JSON format
   app.get("/docs.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
   });
-  console.log(`📚 Docs available at http://localhost:8080/api-docs`);
 }

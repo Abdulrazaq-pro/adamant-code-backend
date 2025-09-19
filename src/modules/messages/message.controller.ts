@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import * as service from "./message.service";
 import { createMessageSchema } from "./message.schema";
 
-// POST /messages
 export const createMessageHandler = async (req: Request, res: Response) => {
   try {
     const parsed = createMessageSchema.parse({
@@ -18,13 +17,12 @@ export const createMessageHandler = async (req: Request, res: Response) => {
   }
 };
 
-// GET /messages/:conversationId
 export const getMessagesHandler = async (
-  req: Request<{ conversationId: string }>, // 👈 typed params
+  req: Request<{ conversationId: string }>, 
   res: Response
 ) => {
   try {
-    const { conversationId } = req.params; // ✅ now strongly typed as string
+    const { conversationId } = req.params; 
     const messages = await service.getMessagesByConversation(conversationId);
     res.json(messages);
   } catch (err: any) {
@@ -32,13 +30,12 @@ export const getMessagesHandler = async (
   }
 };
 
-// DELETE /messages/:id
 export const deleteMessageHandler = async (
-  req: Request<{ id: string }>, // 👈 typed params
+  req: Request<{ id: string }>, 
   res: Response
 ) => {
   try {
-    const { id } = req.params; // ✅ typed as string
+    const { id } = req.params;
     const message = await service.deleteMessage(id);
     res.json(message);
   } catch (err: any) {

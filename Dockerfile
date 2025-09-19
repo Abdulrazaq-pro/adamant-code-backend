@@ -1,21 +1,20 @@
-# Single stage build - simpler approach
-FROM node:18-alpine
+FROM oven/bun:1
 
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies
-RUN npm install
+# Install dependencies with Bun
+RUN bun install
 
-# Copy all source code
+# Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build TypeScript with npm (since your package.json uses tsc)
+RUN bun run build
 
-EXPOSE 3000
+EXPOSE 8000
 
-# Use the dev script which uses ts-node, or start:prod which uses bun
-CMD ["npm", "run", "start:prod"]
+# Use bun to run the compiled JavaScript
+CMD ["bun", "dist/server.js"]

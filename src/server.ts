@@ -1,10 +1,6 @@
 import express from "express";
 import cors from "cors";
-// import swaggerUi from "swagger-ui-express";
-// import { swaggerUi, swaggerSpec } from "./../swagger";
-
-// import swaggerUi  from "swagger-ui-express";
-// import { specs } from "./swagger";
+import { setupSwagger } from "./utils/swagger";
 
 import conversationRoutes from "./modules/conversations/conversation.routes";
 import messageRoutes from "./modules/messages/message.routes";
@@ -22,11 +18,10 @@ app.use(
 app.use(express.json());
 
 // Swagger
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+setupSwagger(app);
 
 app.get("/", (req, res) => {
   res.send("✅ API is running...");
-  // console.log("Swagger docs at http://localhost:5000/api-docs");
 });
 
 app.post("/", (req, res) => {

@@ -1,5 +1,5 @@
 {
-  "name": "custom-gpt",
+  "name": "chatbot-gpt",
   "module": "index.ts",
   "type": "module",
   "private": true,
